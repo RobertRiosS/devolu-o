@@ -1,0 +1,61 @@
+#a) o valor total por motivo;
+#b) o motivo com o maior valor total;
+#c) quantas devoluções têm valor acima de R$ 500,00
+
+devolucoes = [
+  { "pedido": 1001, "motivo": "Defeito",              "valor": 899.90 },
+  { "pedido": 1002, "motivo": "Arrependimento",       "valor": 129.90 },
+  { "pedido": 1003, "motivo": "Defeito",              "valor": 2499.00 },
+  { "pedido": 1004, "motivo": "Avaria no transporte", "valor": 349.90 },
+  { "pedido": 1005, "motivo": "Arrependimento",       "valor": 59.90 },
+  { "pedido": 1006, "motivo": "Defeito",              "valor": 189.90 },
+  { "pedido": 1007, "motivo": "Avaria no transporte", "valor": 1299.00 },
+  { "pedido": 1008, "motivo": "Arrependimento", "valor": 9999.99 },
+  { "pedido": 1008, "motivo": "Arrependimento", "valor": 909.99 }
+]
+
+total = {}
+
+for item in devolucoes:
+  motivo = item["motivo"]
+  valor = item["valor"]
+  total[motivo] = total.get(motivo, 0) + valor
+  
+#Deixei valor negativo pois iria atribuir mais pra frente 
+total_defeito = 0
+total_arrependimento = 0
+total_avaria = 0
+
+print("\n-------------------------------------------")
+#parte feita em casa, essa parte é para somar cada "motivo"
+for devolucao in devolucoes:
+    motivo = devolucao["motivo"]
+    valor = devolucao["valor"]
+    
+    if motivo == "Defeito":
+        total_defeito += valor
+    elif motivo == "Arrependimento":
+        total_arrependimento += valor
+    elif motivo == "Avaria no transporte":
+        total_avaria += valor
+        
+print(f"Total Defeito: R$ {total_defeito:,.2f}")
+print(f"Total Arrependimento: R$ {total_arrependimento:,.2f}")
+print(f"Total Avaria no transporte: R$ {total_avaria:,.2f}")
+
+maior = total_defeito
+motivo_maior = "Defeito"
+
+
+print("\n-------------------------------------------")
+
+print("Maior:", motivo_maior, "_", maior)
+#aqui mostra a quantidade de pedidos maior que 500
+quantidade = len([item for item in devolucoes if item["valor"] > 500.00])
+maior_motivo = max(total, key=total.get)
+
+print("\n-------------------------------------------")
+
+print("Acima de R$ 500:", quantidade)
+
+#"Reescreve para funcionar com qualquer quantidade de devoluções."\
